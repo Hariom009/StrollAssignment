@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProfileScoreView: View {
-    let score: Int = 80
+    let score: Int = 85
     @State private var animateProgress = false
     
     var progress: Double {
@@ -20,7 +20,7 @@ struct ProfileScoreView: View {
                         .fill(Color.black)
                 )
                 .offset(y:55)
-                .zIndex(1) // Ensure it appears above the circle
+                .zIndex(1)
             
             ZStack {
                 Circle()
@@ -30,14 +30,22 @@ struct ProfileScoreView: View {
                 Circle()
                     .trim(from: 0, to: animateProgress ? progress : 0)
                     .stroke(
-                        LinearGradient(colors: [Color.green.opacity(0.1),Color.green.opacity(0.3),Color.green.opacity(0.6)], startPoint: .bottom, endPoint: .top),
+                        LinearGradient(colors: [Color.green.opacity(0.2),Color.green.opacity(0.3),Color.green.opacity(0.6)], startPoint: .bottom, endPoint: .top),
                         style: StrokeStyle(
                             lineWidth: 6,
                             lineCap: .round
                         )
                     )
                     .frame(width: 60, height: 60)
-                    .rotationEffect(.degrees(410)) // Start from top
+                    .rotationEffect(.degrees(410))
+                    .animation(.easeInOut(duration: 1.0), value: animateProgress)
+                
+                // Small rectangle at the end of the stroke
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(width: 2, height: 6)
+                    .offset(y: -30) // radius of circle
+                    .rotationEffect(.degrees(450))
                     .animation(.easeInOut(duration: 1.0), value: animateProgress)
                 
                 Image("dp_5")
@@ -46,17 +54,14 @@ struct ProfileScoreView: View {
                     .frame(width: 56, height: 56)
                     .clipShape(Circle())
             }
-            .offset(y: -10) // Slight overlap with the score badge
+            .offset(y: -10)
         }
         .onAppear {
-            withAnimation(.easeInOut(duration: 1.0)) {
-                animateProgress = true
-            }
+            animateProgress = true
         }
     }
 }
 
-// Preview
 struct ProfileScoreView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileScoreView()
