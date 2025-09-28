@@ -10,13 +10,65 @@ import SwiftUI
 struct MatchView: View {
     var body: some View {
         ZStack{
-            Color.black
-                .ignoresSafeArea()
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            StarryBackground()
+            VStack(alignment: .leading,spacing: 8){
+                navTitleHeader
+                
+                ScrollView(.horizontal,showsIndicators: false){
+                    HStack(spacing: 16){
+                        StoryCard(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
+                        StoryCard(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
+                        StoryCard(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
+                    }
+                }
+                
+                ChatListView()
+            }
+        }
+    }
+    
+    private var navTitleHeader: some View {
+        HStack{
+            VStack(alignment: .leading,spacing: 8){
+                HStack(spacing: 8){
+                    Text("Your Turn")
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .foregroundColor(.white)
+                    ZStack{
+                        Circle()
+                            .frame(width: 20,height: 20)
+                            .foregroundStyle(Color(red: 181/255, green: 178/255, blue: 255/255))
+                        Text("7")
+                            .font(.system(size: 12, weight: .bold, design: .default))
+                            .foregroundStyle(.black)
+                        
+                    }
+                }
+                Text("Make your move ,they are waiting🎵")
+                    .foregroundStyle(Color.white.opacity(0.6))
+                    .italic()
+            }
+            Spacer()
+            ProfileScoreView()
+        }
+        .padding()
+    }
+    private var chatAndPendingPicker: some View {
+        HStack{
+            VStack{
+                Text("Chats")
+                    .font(.system(size: 32, weight: .semibold, design: .default))
+                    .foregroundStyle(.white)
+            }
+            
+            Text("Pending")
+                .font(.system(size: 32, weight: .semibold, design: .default))
                 .foregroundStyle(.white)
         }
     }
 }
+
+
 
 #Preview {
     MatchView()
