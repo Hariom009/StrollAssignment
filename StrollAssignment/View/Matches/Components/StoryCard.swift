@@ -13,7 +13,7 @@ struct StoryCard: View {
     var age: Int
     var gradientColors: [Color] = [
         Color(red: 0.76, green: 0.55, blue: 0.35),
-        Color.black
+        Color.gray.opacity(0.1)
     ]
     
     var body: some View {
@@ -54,11 +54,11 @@ struct StoryCard: View {
                 // Bottom content
                 VStack(spacing: 12) {
                     Text("\(text), \(age)")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     
                     Text(description)
-                        .font(.system(size: 14, weight: .regular))
+                        .font(.system(size: 12, weight: .regular))
                         .foregroundStyle(Color.white.opacity(0.8))
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
@@ -67,7 +67,7 @@ struct StoryCard: View {
                 .padding(.bottom, 32)
             }
         }
-        .frame(width: 190, height: 290)
+        .frame(width: 180, height: 250)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 8)
     }

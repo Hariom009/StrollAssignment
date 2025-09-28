@@ -3,7 +3,9 @@ import SwiftUI
 struct MainTabView: View {
     @State private var selectedTab = 0
     
+    
     init() {
+     
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         
@@ -19,13 +21,22 @@ struct MainTabView: View {
         let selectedColor = UIColor(red: 181/255, green: 178/255, blue: 255/255, alpha: 1)
         appearance.stackedLayoutAppearance.selected.iconColor = selectedColor
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: selectedColor]
+        // badge colour
+        appearance.stackedLayoutAppearance.normal.badgeBackgroundColor = selectedColor
+
+        
         
         // Apply appearance
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
+        
     }
     
     var body: some View {
+        let badgeView = Text("10")
+            .monospacedDigit()
+            .foregroundColor(.black)
+
         TabView(selection: $selectedTab) {
             CardsView()
                 .tag(0)
@@ -33,6 +44,7 @@ struct MainTabView: View {
                     Image("card")
                     Text("Cards")
                 }
+                .badge(badgeView)
             
             BonfireView()
                 .tag(1)

@@ -16,8 +16,8 @@ struct MatchView: View {
                 
                 ScrollView(.horizontal,showsIndicators: false){
                     HStack(spacing: 16){
-                        StoryCard(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
-                        StoryCard(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
+                        StoryCardFirst(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
+                        StoryCard(text: "Malte", description: "What is the most important quality in friendship to you?", age: 31)
                         StoryCard(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
                     }
                 }
