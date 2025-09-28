@@ -80,8 +80,8 @@ struct ChatListView: View {
                         }
                         
                         Text("The ice is broken. Time to hit it off")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+                            .font(.system(size: 12,weight: .semibold))
+                            .foregroundStyle(Color.white.opacity(0.6))
                             .italic()
                     }
                     .padding(.horizontal, 20)
@@ -194,7 +194,7 @@ struct ChatRowView: View {
                         }
                     } else {
                         Text(chat.message)
-                            .font(chat.isUnread ? .headline : .subheadline)
+                            .font(.subheadline)
                             .fontWeight(chat.isUnread ? .semibold : .regular)
                             .foregroundColor(chat.isUnread ? .white : .gray)
                             .lineLimit(2)

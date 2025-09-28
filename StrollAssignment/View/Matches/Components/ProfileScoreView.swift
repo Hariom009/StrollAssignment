@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProfileScoreView: View {
-    let score: Int = 90
+    let score: Int = 80
     @State private var animateProgress = false
     
     var progress: Double {
@@ -9,14 +9,26 @@ struct ProfileScoreView: View {
     }
     
     var body: some View {
-        VStack(spacing: 18) {
+        VStack(spacing: 0) {
+            // Score badge positioned above the circle
+            Text("90")
+                .font(.system(size: 12, weight: .bold))
+                .foregroundColor(.white)
+                .frame(width: 50, height: 25)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.black)
+                )
+                .offset(y:55)
+                .zIndex(1) // Ensure it appears above the circle
+            
             ZStack {
                 Circle()
                     .stroke(Color.gray.opacity(0.3), lineWidth: 4)
                     .frame(width: 60, height: 60)
                 
                 Circle()
-                    .trim(from: 1 - progress, to: animateProgress ? progress : 0)
+                    .trim(from: 0, to: animateProgress ? progress : 0)
                     .stroke(
                         Color.green,
                         style: StrokeStyle(
@@ -25,26 +37,18 @@ struct ProfileScoreView: View {
                         )
                     )
                     .frame(width: 60, height: 60)
-                    .rotationEffect(.degrees(380)) // Start from top
+                    .rotationEffect(.degrees(410)) // Start from top
                     .animation(.easeInOut(duration: 1.0), value: animateProgress)
+                
                 Image("dp_5")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 56, height: 56)
                     .clipShape(Circle())
             }
-            Text("90")
-                .font(.system(size: 12, weight: .bold))
-                .foregroundColor(.white)
-                .frame(width: 60,height: 25)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.black)
-                )
-                .offset(y:-30)
+            .offset(y: -10) // Slight overlap with the score badge
         }
         .onAppear {
-            // Trigger animation when view appears
             withAnimation(.easeInOut(duration: 1.0)) {
                 animateProgress = true
             }

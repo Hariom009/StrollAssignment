@@ -11,11 +11,11 @@ struct MatchView: View {
     var body: some View {
         ZStack{
             StarryBackground()
-            VStack(alignment: .leading,spacing: 8){
+            VStack(alignment: .leading,spacing: 12){
                 navTitleHeader
                 
                 ScrollView(.horizontal,showsIndicators: false){
-                    HStack(spacing: 16){
+                    HStack(spacing: 12){
                         StoryCardFirst(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
                         StoryCard(text: "Malte", description: "What is the most important quality in friendship to you?", age: 31)
                         StoryCard(text: "Amanda", description: "What is your most favourite childhood memory?", age: 22)
@@ -45,6 +45,7 @@ struct MatchView: View {
                     }
                 }
                 Text("Make your move ,they are waiting🎵")
+                    .font(.system(size: 12,weight: .semibold))
                     .foregroundStyle(Color.white.opacity(0.6))
                     .italic()
             }

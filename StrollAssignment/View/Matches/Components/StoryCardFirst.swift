@@ -63,11 +63,11 @@ struct StoryCardFirst: View {
                 // Bottom content
                 VStack(spacing: 12) {
                     Text("\(text), \(age)")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .font(.system(size: 14, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     
                     Text(description)
-                        .font(.system(size: 12, weight: .regular))
+                        .font(.system(size: 8, weight: .regular))
                         .foregroundStyle(Color.white.opacity(0.8))
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
@@ -76,7 +76,7 @@ struct StoryCardFirst: View {
                 .padding(.bottom, 32)
             }
         }
-        .frame(width: 180, height: 250)
+        .frame(width: 160, height: 210)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 8)
     }
