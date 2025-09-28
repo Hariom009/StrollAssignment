@@ -19,10 +19,39 @@ struct StoryCard: View {
     var body: some View {
         ZStack {
             // Background gradient
+            // Background gradient matching the exact image
             LinearGradient(
-                colors: gradientColors,
-                startPoint: .top,
+                colors: [
+                    Color.brown,
+                    Color.brown.opacity(0.7),   // Bright teal-green top
+                    Color.brown.opacity(0.4),
+                    Color.brown.opacity(0.2),
+                    Color.gray.opacity(0.1),
+                    Color.gray.opacity(0.1)
+                ],
+                startPoint: .topLeading,
                 endPoint: .bottom
+            )
+            
+            .overlay(
+                // Purple overlay from right side
+                LinearGradient(
+                    colors: [
+                        Color.brown.opacity(0.7),
+                        Color.brown.opacity(0.4),  // Strong purple
+                        Color.black.opacity(0.2),
+                        Color.gray.opacity(0.1)
+                    ],
+                    startPoint: .topTrailing,
+                    endPoint: .leading
+                )
+                .mask(
+                    LinearGradient(
+                        colors: [Color.gray.opacity(0.1), Color.clear],
+                        startPoint: .trailing,
+                        endPoint: .leading
+                    )
+                )
             )
             
             VStack(spacing: 0) {
@@ -30,7 +59,7 @@ struct StoryCard: View {
                 HStack {
                     Spacer()
                     Text("📣 They made a move!")
-                        .font(.system(size: 10, weight: .semibold))
+                        .font(.system(size: 8, weight: .semibold))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 8)
@@ -40,7 +69,7 @@ struct StoryCard: View {
                         )
                     Spacer()
                 }
-                .padding(.top, 20)
+                .padding(.top, 10)
                 
                 Spacer()
                 
@@ -52,22 +81,21 @@ struct StoryCard: View {
                 Spacer()
                 
                 // Bottom content
-                VStack(spacing: 12) {
+                VStack(spacing: 4) {
                     Text("\(text), \(age)")
-                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
                     
                     Text(description)
-                        .font(.system(size: 8, weight: .regular))
+                        .font(.system(size: 10, weight: .regular))
                         .foregroundStyle(Color.white.opacity(0.8))
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
-                        .padding(.horizontal, 20)
                 }
                 .padding(.bottom, 32)
             }
         }
-        .frame(width: 160, height: 210)
+        .frame(width: 160, height: 240)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 8)
     }

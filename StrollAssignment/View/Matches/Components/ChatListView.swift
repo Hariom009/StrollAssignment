@@ -1,3 +1,5 @@
+
+// MARK: - ChatListView.swift
 import SwiftUI
 
 struct ChatListView: View {
@@ -55,58 +57,51 @@ struct ChatListView: View {
     ]
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color.black.ignoresSafeArea()
-                
-                VStack(alignment: .leading, spacing: 0) {
-                    // Header
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(spacing: 20) {
-                            VStack(spacing: 0){
-                                Text("Chats")
-                                    .font(.system(size: 24, weight: .bold,design: .rounded))
-                                    .foregroundColor(.white)
-                                Rectangle()
-                                    .foregroundStyle(.white)
-                                    .frame(width: 70,height: 2)
-                            }
-                            
-                            Text("Pending")
-                                .font(.system(size: 24, weight: .bold,design: .rounded))
-                                .foregroundColor(.gray)
-                            
-                            Spacer()
-                        }
-                        
-                        Text("The ice is broken. Time to hit it off")
-                            .font(.system(size: 12,weight: .semibold))
-                            .foregroundStyle(Color.white.opacity(0.6))
-                            .italic()
+        VStack(alignment: .leading, spacing: 0) {
+            // Header with proper spacing
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 28) {
+                    VStack(alignment: .leading, spacing: 4){
+                        Text("Chats")
+                            .font(.system(size: 22, weight: .semibold, design: .default))
+                            .foregroundColor(.white)
+                        Rectangle()
+                            .foregroundStyle(.white)
+                            .frame(width: 60, height: 2)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 10)
-                    .padding(.bottom, 20)
                     
-                    // Chat List
-                    ScrollView {
-                        LazyVStack(spacing: 0) {
-                            ForEach(chats) { chat in
-                                ChatRowView(chat: chat)
-                                    .padding(.horizontal, 20)
-                                
-                                if chat.id != chats.last?.id {
-                                    Divider()
-                                        .background(Color.gray.opacity(0.3))
-                                        .padding(.leading, 80)
-                                }
-                            }
+                    Text("Pending")
+                        .font(.system(size: 22, weight: .semibold, design: .default))
+                        .foregroundColor(.gray)
+                    
+                    Spacer()
+                }
+                
+                Text("The ice is broken. Time to hit it off")
+                    .font(.system(size: 11, weight: .medium, design: .default))
+                    .foregroundStyle(Color.white.opacity(0.6))
+                    .italic()
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 8)
+            .padding(.bottom, 16)
+            
+            // Chat List with proper spacing
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(chats) { chat in
+                        ChatRowView(chat: chat)
+                            .padding(.horizontal, 16)
+                        
+                        if chat.id != chats.last?.id {
+                            Divider()
+                                .background(Color.gray.opacity(0.2))
+                                .padding(.leading, 72)
                         }
                     }
                 }
             }
         }
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -114,8 +109,8 @@ struct ChatRowView: View {
     let chat: ChatItem
     
     var body: some View {
-        HStack(spacing: 15) {
-            // Profile Image
+        HStack(spacing: 12) {
+            // Profile Image - larger and properly positioned
             ZStack {
                 Circle()
                     .fill(LinearGradient(
@@ -123,112 +118,113 @@ struct ChatRowView: View {
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ))
-                    .frame(width: 50, height: 50)
+                    .frame(width: 56, height: 56)
                 
                 Image(chat.profileImage)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 50, height: 50)
+                    .frame(width: 56, height: 56)
                     .clipShape(.circle)
             }
             
-            // Chat Content
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
+            // Chat Content with better alignment
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(alignment: .center) {
                     Text(chat.name)
-                        .font(.headline)
-                        .fontWeight(.bold)
+                        .font(.system(size: 16, weight: .semibold, design: .default))
                         .foregroundColor(chat.isGrayed ? .gray : .white)
-                    // Your move badge or time
+                    
+                    // Your move badge or new chat badge
                     if chat.isYourMove && !chat.isGrayed {
                         Text("Your move")
-                            .font(.caption)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color.white.opacity(0.1))
+                            .font(.system(size: 10, weight: .medium, design: .default))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 3)
+                            .background(Color.white.opacity(0.15))
                             .foregroundColor(.white)
-                            .cornerRadius(12)
-                    }else if chat.isNewChat{
-                        HStack{
+                            .cornerRadius(8)
+                    } else if chat.isNewChat {
+                        HStack(spacing: 3) {
                             Circle()
                                 .foregroundStyle(.white)
-                                .frame(width: 5,height:5)
+                                .frame(width: 4, height: 4)
                             Text("New chat")
+                                .font(.system(size: 10, weight: .medium, design: .default))
                         }
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color(red: 181/255, green: 178/255, blue: 255/255).opacity(0.6))
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 3)
+                        .background(Color(red: 181/255, green: 178/255, blue: 255/255).opacity(0.4))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
                     }
                     
                     Spacer()
+                    
+                    // Time with proper styling
                     Text(chat.time)
-                        .font(.system(size: 12,weight: .semibold,design: .rounded))
+                        .font(.system(size: 11, weight: .bold, design: .default))
                         .foregroundStyle(chat.time == "Wed" ? Color.white : Color(red: 181/255, green: 178/255, blue: 255/255))
+                        .opacity(0.7)
                 }
                 
-                HStack {
-                    // Voice note or message
+                HStack(alignment: .center) {
+                    // Voice note or message with proper spacing
                     if chat.hasVoiceNote {
                         HStack(spacing: 6) {
                             Image(systemName: "mic.fill")
-                                .font(.headline)
-                                .foregroundStyle(Color(red: 181/255, green: 178/255, blue: 255/255))
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(
+                                    LinearGradient(colors: [Color(red: 181/255, green: 178/255, blue: 255/255),Color(red: 181/255, green: 178/255, blue: 255/255).opacity(0.8)], startPoint: .top, endPoint: .bottom)
+                                )
                             
                             // Audio waveform representation
-                            HStack(spacing: 2) {
+                            HStack(spacing: 1.5) {
                                 ForEach(0..<8, id: \.self) { _ in
                                     Rectangle()
                                         .foregroundStyle(Color(red: 181/255, green: 178/255, blue: 255/255))
-                                        .frame(width: 3, height: CGFloat.random(in: 8...20))
-                                        .cornerRadius(1.5)
+                                        .frame(width: 2.5, height: CGFloat.random(in: 6...16))
+                                        .cornerRadius(1.25)
                                 }
                             }
                             
                             Text(chat.voiceDuration ?? "")
-                                .font(.headline)
+                                .font(.system(size: 14, weight: .medium, design: .default))
                                 .foregroundStyle(Color(red: 181/255, green: 178/255, blue: 255/255))
                         }
                     } else {
                         Text(chat.message)
-                            .font(.subheadline)
-                            .fontWeight(chat.isUnread ? .semibold : .regular)
+                            .font(.system(size: 14, weight: chat.isUnread ? .medium : .regular, design: .default))
                             .foregroundColor(chat.isUnread ? .white : .gray)
                             .lineLimit(2)
                     }
                     
                     Spacer()
                     
-                    // Unread count or star
+                    // Unread count or star with proper sizing
                     if let unreadCount = chat.unreadCount {
                         Text("\(unreadCount)")
-                            .font(.subheadline)
-                            .fontWeight(.bold)
+                            .font(.system(size: 12, weight: .semibold, design: .default))
                             .foregroundStyle(.black)
-                            .frame(width: 30, height: 20)
+                            .frame(width: 24, height: 18)
                             .background(
-                                RoundedRectangle(cornerRadius: 12)
+                                RoundedRectangle(cornerRadius: 9)
                                     .fill(Color(red: 181/255, green: 178/255, blue: 255/255))
                             )
                     } else if chat.isStarred {
                         Image(systemName: "star.fill")
-                            .font(.caption2)
-                            .fontWeight(.thin)
+                            .font(.system(size: 8, weight: .thin))
                             .foregroundStyle(.black)
-                            .frame(width: 30, height: 20)
+                            .frame(width: 24, height: 18)
                             .background(
-                                RoundedRectangle(cornerRadius: 12)
+                                RoundedRectangle(cornerRadius: 9)
                                     .fill(Color(red: 181/255, green: 178/255, blue: 255/255))
                             )
                     }
-
                 }
-            } 
+                .padding(.top, 1)
+            }
         }
-        .padding(.vertical, 12)
+        .padding(.vertical, 10)
     }
 }
 
@@ -248,7 +244,7 @@ struct ChatItem: Identifiable {
     let isUnread: Bool
     let isNewChat: Bool
     
-    init(name: String, message: String, time: String, profileImage: String, hasVoiceNote: Bool, voiceDuration: String? = nil, isStarred: Bool = false, isYourMove: Bool = false, unreadCount: Int? = nil, messageType: MessageType, isGrayed: Bool = false,isUnread: Bool = false,isNewChat: Bool = false) {
+    init(name: String, message: String, time: String, profileImage: String, hasVoiceNote: Bool, voiceDuration: String? = nil, isStarred: Bool = false, isYourMove: Bool = false, unreadCount: Int? = nil, messageType: MessageType, isGrayed: Bool = false, isUnread: Bool = false, isNewChat: Bool = false) {
         self.name = name
         self.message = message
         self.time = time
@@ -272,7 +268,7 @@ enum MessageType {
     case yourMove
 }
 
-
 #Preview {
     ChatListView()
+        .preferredColorScheme(.dark)
 }

@@ -12,6 +12,7 @@ struct StrollAssignmentApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .preferredColorScheme(.light) // Force Dark Mode
         }
     }
 }

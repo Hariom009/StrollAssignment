@@ -30,7 +30,7 @@ struct ProfileScoreView: View {
                 Circle()
                     .trim(from: 0, to: animateProgress ? progress : 0)
                     .stroke(
-                        Color.green,
+                        LinearGradient(colors: [Color.green.opacity(0.1),Color.green.opacity(0.3),Color.green.opacity(0.6)], startPoint: .bottom, endPoint: .top),
                         style: StrokeStyle(
                             lineWidth: 6,
                             lineCap: .round

@@ -21,10 +21,19 @@ struct MainTabView: View {
         let selectedColor = UIColor(red: 181/255, green: 178/255, blue: 255/255, alpha: 1)
         appearance.stackedLayoutAppearance.selected.iconColor = selectedColor
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: selectedColor]
-        // badge colour
-        appearance.stackedLayoutAppearance.normal.badgeBackgroundColor = selectedColor
-
         
+        // Badge styling - keep background color, black text with semibold font
+        appearance.stackedLayoutAppearance.normal.badgeBackgroundColor = selectedColor
+        appearance.stackedLayoutAppearance.normal.badgeTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .semibold)
+        ]
+        
+        appearance.stackedLayoutAppearance.selected.badgeBackgroundColor = selectedColor
+        appearance.stackedLayoutAppearance.selected.badgeTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .semibold)
+        ]
         
         // Apply appearance
         UITabBar.appearance().standardAppearance = appearance
@@ -33,10 +42,6 @@ struct MainTabView: View {
     }
     
     var body: some View {
-        let badgeView = Text("10")
-            .monospacedDigit()
-            .foregroundColor(.black)
-
         TabView(selection: $selectedTab) {
             CardsView()
                 .tag(0)
@@ -47,7 +52,7 @@ struct MainTabView: View {
                         .frame(width: 24,height: 24)
                     Text("Cards")
                 }
-                .badge(badgeView)
+                .badge(10)
             
             BonfireView()
                 .tag(1)
