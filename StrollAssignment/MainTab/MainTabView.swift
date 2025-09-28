@@ -42,6 +42,9 @@ struct MainTabView: View {
                 .tag(0)
                 .tabItem {
                     Image("card")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24,height: 24)
                     Text("Cards")
                 }
                 .badge(badgeView)
@@ -50,6 +53,9 @@ struct MainTabView: View {
                 .tag(1)
                 .tabItem {
                     Image("bonfire")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24,height: 24)
                     Text("Bonfire")
                 }
             
@@ -57,6 +63,9 @@ struct MainTabView: View {
                 .tag(2)
                 .tabItem {
                     Image("chat")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24,height: 24)
                     Text("Matches")
                 }
             
@@ -64,6 +73,9 @@ struct MainTabView: View {
                 .tag(3)
                 .tabItem {
                     Image("profile")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24,height: 24)
                     Text("Profile")
                 }
         }
